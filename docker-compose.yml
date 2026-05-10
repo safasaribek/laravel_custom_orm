@@ -1,0 +1,52 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: orm_app
+    working_dir: /var/www/html
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      APP_ENV: local
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: orm_db
+      DB_USERNAME: orm_user
+      DB_PASSWORD: orm_pass
+    ports:
+      - "8000:8000"
+    networks:
+      - orm_network
+
+  db:
+    image: mysql:8.0
+    container_name: orm_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root_pass
+      MYSQL_DATABASE: orm_db
+      MYSQL_USER: orm_user
+      MYSQL_PASSWORD: orm_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "orm_user", "-porm_pass"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - orm_network
+
+volumes:
+  db_data:
+
+networks:
+  orm_network:
+    driver: bridge
