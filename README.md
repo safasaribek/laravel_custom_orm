@@ -59,11 +59,18 @@ Bu komut:
 - PHP 8.4 + Laravel 12 konteynerini (`orm_app`) oluşturur.
 - Bağımlılıkları (`composer install`) otomatik yükler.
 - `bootstrap/cache` ve `storage` izinlerini ayarlar.
-- `APP_KEY`'i otomatik oluşturur.
 - MySQL 8 konteynerini (`orm_db`) başlatır.
 - `database/init.sql` ile tabloları otomatik oluşturur.
 
-### 4. Uygulamayı Aç
+### 4. APP_KEY Oluştur
+
+Konteynerler çalıştıktan sonra uygulama anahtarını üretin (bu adım `.env` dosyanızı güncelleyecektir):
+
+```bash
+docker-compose exec app php artisan key:generate
+```
+
+### 5. Uygulamayı Aç
 
 Tarayıcıdan şu adrese gidebilirsiniz:
 [http://localhost:8000](http://localhost:8000)
