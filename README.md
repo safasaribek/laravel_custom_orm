@@ -75,7 +75,7 @@ docker-compose exec app php artisan key:generate
 Tarayıcıdan şu adrese gidebilirsiniz:
 [http://localhost:8000](http://localhost:8000)
 
-Veya örnek scripti terminalden çalıştırarak ORM'i test edin:
+Veya örnek scripti terminalden çalıştırarak ORM'i test edin (bu script her seferinde veritabanını temizleyip yeniden doldurur):
 
 ```bash
 docker-compose exec app php example.php

@@ -24,6 +24,21 @@ echo " Mini ORM — Örnek Kullanım\n";
 echo "========================================\n\n";
 
 // -----------------------------------------------------------------------
+// 0. Temizlik (Demo her çalıştığında temiz başlasın)
+// -----------------------------------------------------------------------
+echo "Veritabanı temizleniyor...\n";
+$pdo = \App\Orm\Database::getInstance()->getPdo();
+$pdo->exec("SET FOREIGN_KEY_CHECKS=0;");
+$pdo->exec("TRUNCATE TABLE post_tag;");
+$pdo->exec("TRUNCATE TABLE posts;");
+$pdo->exec("TRUNCATE TABLE profiles;");
+$pdo->exec("TRUNCATE TABLE products;");
+$pdo->exec("TRUNCATE TABLE tags;");
+$pdo->exec("TRUNCATE TABLE users;");
+$pdo->exec("SET FOREIGN_KEY_CHECKS=1;");
+echo "Temizlik tamamlandı.\n\n";
+
+// -----------------------------------------------------------------------
 // 1. CRUD
 // -----------------------------------------------------------------------
 echo "--- 1. CRUD ---\n";
