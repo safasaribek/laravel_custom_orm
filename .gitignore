@@ -3,5 +3,10 @@
 .env
 .phpunit.result.cache
 *.log
-storage/logs/*
-bootstrap/cache/*
+/storage/logs/*.log
+/bootstrap/cache/*.php
+!/bootstrap/cache/.gitkeep
+!/storage/framework/cache/.gitkeep
+!/storage/framework/sessions/.gitkeep
+!/storage/framework/views/.gitkeep
+!/storage/logs/.gitkeep

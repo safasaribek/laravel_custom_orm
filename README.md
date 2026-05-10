@@ -40,7 +40,7 @@ app/Orm/
 
 ```bash
 git clone <git@github.com:safasaribek/laravel_custom_orm.git>
-cd laravel-custom-orm
+cd laravel_custom_orm
 ```
 
 ### 2. Ortam Dosyasını Hazırla
@@ -49,45 +49,26 @@ cd laravel-custom-orm
 cp .env.example .env
 ```
 
-### 3. Bağımlılıkları Yükle
-
-Konteynerleri başlatmadan önce composer bağımlılıklarını yükleyin:
-
-```bash
-docker-compose run --rm app composer install
-```
-
-### 4. Konteynerleri Başlat
+### 3. Konteynerleri Başlat
 
 ```bash
 docker-compose up -d --build
 ```
 
 Bu komut:
-- PHP 8.4 + Laravel 12 konteynerini (`orm_app`) oluşturur
-- MySQL 8 konteynerini (`orm_db`) başlatır
-- `database/init.sql` ile tabloları otomatik oluşturur
+- PHP 8.4 + Laravel 12 konteynerini (`orm_app`) oluşturur.
+- Bağımlılıkları (`composer install`) otomatik yükler.
+- `bootstrap/cache` ve `storage` izinlerini ayarlar.
+- `APP_KEY`'i otomatik oluşturur.
+- MySQL 8 konteynerini (`orm_db`) başlatır.
+- `database/init.sql` ile tabloları otomatik oluşturur.
 
-### 5. APP_KEY Oluştur
-
-```bash
-docker-compose exec app php artisan key:generate
-```
-
-### 6. Yazma İzinlerini Ayarla (Opsiyonel)
-
-Eğer izin hatası alırsanız:
-
-```bash
-chmod -R 777 storage bootstrap/cache
-```
-
-### 7. Uygulamayı Aç
+### 4. Uygulamayı Aç
 
 Tarayıcıdan şu adrese gidebilirsiniz:
 [http://localhost:8000](http://localhost:8000)
 
-Veya örnek scripti terminalden çalıştırın:
+Veya örnek scripti terminalden çalıştırarak ORM'i test edin:
 
 ```bash
 docker-compose exec app php example.php
@@ -254,6 +235,6 @@ Tüm sorgular `PDO::prepare()` + `bindValue()` kullanır. Kullanıcı girdisi as
 
 ## Süre
 
-Toplam: **11:47~15:16**
+Toplam: **11:47~15:26**
 
 # laravel_custom_orm

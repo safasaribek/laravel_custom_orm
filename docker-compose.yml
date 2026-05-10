@@ -7,6 +7,8 @@ services:
     working_dir: /var/www/html
     volumes:
       - .:/var/www/html
+      # vendor/ dizinini host'un üzerine yazan volume mount'dan koru
+      - vendor_data:/var/www/html/vendor
     depends_on:
       db:
         condition: service_healthy
@@ -46,6 +48,7 @@ services:
 
 volumes:
   db_data:
+  vendor_data:
 
 networks:
   orm_network:
